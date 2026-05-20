@@ -8,14 +8,14 @@ interface TokenCardProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const TokenCard = React.forwardRef<HTMLDivElement, TokenCardProps>(
   ({ color = "hsl(var(--primary))", className, children, ...props }, ref) => {
+    const style = { "--tokencard-color": color } as React.CSSProperties;
+
     return (
       <div className="token-card overflow-hidden relative">
         {/* Card */}
         <div
           ref={ref}
-          style={{
-            ["--tokencard-color" as any]: color,
-          }}
+          style={style}
           className={cn(
             "overflow-hidden relative",
             "bg-[var(--tokencard-color)]",
