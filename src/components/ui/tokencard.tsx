@@ -1,0 +1,42 @@
+import * as React from "react";
+import { cn } from "@/lib/utils";
+import { TokenBorder } from "@/components/ui/tokenborder";
+
+interface TokenCardProps extends React.HTMLAttributes<HTMLDivElement> {
+  color?: string;
+}
+
+const TokenCard = React.forwardRef<HTMLDivElement, TokenCardProps>(
+  ({ color = "hsl(var(--primary))", className, children, ...props }, ref) => {
+    return (
+      <div className="token-card overflow-hidden relative">
+        {/* Card */}
+        <div
+          ref={ref}
+          style={{
+            ["--tokencard-color" as any]: color,
+          }}
+          className={cn(
+            "overflow-hidden relative",
+            "bg-[var(--tokencard-color)]",
+            className
+          )}
+          {...props}
+        >
+          {/* Card inner content */}
+          <div className="p-4">
+            {children}
+          </div>
+        </div>
+
+        {/* Token Border OUTSIDE below the card */}
+        <TokenBorder color={color} />
+
+      </div>
+    );
+  }
+);
+
+TokenCard.displayName = "TokenCard";
+
+export { TokenCard };

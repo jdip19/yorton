@@ -1,0 +1,81 @@
+import { useState } from "react";
+import { Home, Clock, Info, HelpCircle, Ticket, Bell, Users } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { cn } from "@/lib/utils";
+import { TimingDrawer } from "./TimingDrawer";
+
+interface NavItem {
+  icon: React.ElementType;
+  label: string;
+  path: string;
+  isDrawer?: boolean;
+}
+
+interface BottomNavProps {
+  variant?: "patient" | "clinic";
+}
+
+const patientNavItems: NavItem[] = [
+  { icon: Home, label: "Home", path: "/" },
+  { icon: Clock, label: "Timing", path: "/timing", isDrawer: true },
+  { icon: Info, label: "About", path: "/about" },
+  { icon: HelpCircle, label: "Help", path: "/help" },
+];
+
+const clinicNavItems: NavItem[] = [
+  { icon: Home, label: "Home", path: "/clinic" },
+  { icon: Ticket, label: "Token", path: "/token" },
+  { icon: Bell, label: "Notification", path: "/notifications" },
+  { icon: Users, label: "Patients", path: "/patients" },
+];
+
+export const BottomNav = ({ variant = "patient" }: BottomNavProps) => {
+  const location = useLocation();
+  const items = variant === "patient" ? patientNavItems : clinicNavItems;
+  const [showTiming, setShowTiming] = useState(false);
+
+  return (
+    <>
+      <nav className="fixed bottom-0 left-0 right-0 bg-card border-t border-border">
+        <div className="flex items-center justify-around h-16 max-w-lg mx-auto">
+          {items.map((item) => {
+            const Icon = item.icon;
+            const isActive = location.pathname === item.path;
+            
+            if (item.isDrawer) {
+              return (
+                <button
+                  key={item.path}
+                  onClick={() => setShowTiming(true)}
+                  className={cn(
+                    "flex flex-col items-center justify-center gap-1 px-4 py-2 transition-colors",
+                    isActive ? "text-primary" : "text-muted-foreground"
+                  )}
+                >
+                  <Icon className="w-6 h-6" />
+                  <span className="text-xs font-medium">{item.label}</span>
+                </button>
+              );
+            }
+
+            return (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={cn(
+                  "flex flex-col items-center justify-center gap-1 px-4 py-2 transition-colors",
+                  isActive ? "text-primary" : "text-muted-foreground"
+                )}
+              >
+                <Icon className="w-6 h-6" />
+                <span className="text-xs font-medium">{item.label}</span>
+              </Link>
+            );
+          })}
+        </div>
+      </nav>
+
+      <TimingDrawer open={showTiming} onOpenChange={setShowTiming} />
+    </>
+  );
+};
