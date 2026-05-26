@@ -13,7 +13,7 @@ export const QueueStats = ({ totalAhead, estimatedTime }: QueueStatsProps) => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Users className="w-5 h-5" />
-            <span className="font-medium">Total ahead</span>
+            <span className="font-semibold">Total ahead</span>
           </div>
           <span className="text-2xl font-semibold">{totalAhead}</span>
         </div>
