@@ -18,7 +18,7 @@ const Home = () => {
 
       <div className="py-6 space-y-6">
 
-        <div className="px-4 grid grid-cols-1 gap-2 md:grid-cols-2 md:items-start">
+        <div className="px-4 md:px-8 grid grid-cols-1 gap-2 md:grid-cols-[7fr_3fr] md:items-start">
           <div>
             {hasQueue ? (
               <>
@@ -48,7 +48,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="px-4">
+        <div className="px-4 md:px-8">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-bold">Recent History</h3>
             <Button variant="ghost" size="sm" className="text-primary">

@@ -9,9 +9,10 @@ import { TokenBorder } from "@/components/ui/tokenborder";
 interface TokenBookingCardProps {
   doctorName: string;
   tokenNumber?: string;
+  color?: string;
 }
 
-export const TokenBookingCard = ({ doctorName, tokenNumber }: TokenBookingCardProps) => {
+export const TokenBookingCard = ({ doctorName, tokenNumber, color = "hsl(var(--white))" }: TokenBookingCardProps) => {
   const [showLogin, setShowLogin] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [bookedToken, setBookedToken] = useState(0);
@@ -36,25 +37,26 @@ export const TokenBookingCard = ({ doctorName, tokenNumber }: TokenBookingCardPr
 
   return (
     <>
-      <Card className="relative shadow-lg overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-3 bg-foreground rounded-t-lg" />
-        <CardContent className="pt-8 pb-6 text-center">
-          <h3 className="text-lg font-bold mb-6">{doctorName}</h3>
-          <div className="text-8xl font-bold text-muted-foreground/20 mb-6">
-            {tokenNumber || "#"}
-          </div>
-          <Button
-            onClick={handleBookToken}
-            className="w-full max-w-xs bg-primary hover:bg-primary/90"
-          >
-            Book My Token
-          </Button>
-        </CardContent>
-        <div className="h-4 bg-gradient-to-b from-transparent to-muted/30">
-          <TokenBorder />
-
+      <div className="h-4 bg-foreground rounded-lg -mb-2" />
+      <div className="px-3">
+        <Card className="relative rounded-none border-0 shadow-none overflow-hidden">
+          <CardContent className="pt-8 pb-6 text-center">
+            <h3 className="text-lg font-bold mb-6">{doctorName}</h3>
+            <div className="text-8xl font-bold text-muted-foreground/20 mb-6">
+              {tokenNumber || "#"}
+            </div>
+            <Button
+              onClick={handleBookToken}
+              className="w-full max-w-xs bg-primary hover:bg-primary/90"
+            >
+              Book My Token
+            </Button>
+          </CardContent>
+        </Card>
+        <div className="overflow-hidden shadow--lg">
+          <TokenBorder color={color} />
         </div>
-      </Card>
+      </div>
 
       <LoginDialog
         open={showLogin}

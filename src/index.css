@@ -38,6 +38,7 @@ All colors MUST be HSL.
     --secondary-300: 0 0% 43%;
     --secondary-400: 0 0% 24%;
     --secondary-500: 0 0% 5%;
+    --white: 0 0% 100%;
 
     --primary-gradient: linear-gradient(0deg, hsl(174, 29%, 45%), hsl(174, 42%, 58%));
     --primary-gradient: linear-gradient(0deg, hsl(0, 0%, 27%), hsl(0, 0%, 5%));
